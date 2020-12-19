@@ -9,13 +9,12 @@
 
 The technical architecture for this project is as show below:
 
-![Architecture](https://github.com/Justmaister/Data-Enginering-Stock-Project/blob/master/images/Finance%20Project%20Architecture.png)
 
-**GRAPH**
+![Architecture](https://github.com/Justmaister/Data-Enginering-Stock-Project/blob/master/images/Finance%20Project%20Architecture.png)
 
 1. The Data extraction is done using the Rest API to the Financial Modeling Prep using the GET request.
 ```sh
-code of an api
+https://financialmodelingprep.com/api/v3/income-statement/AAPL?&apikey=demo'
 ```
 2. Copy the data downloaded from the API call to an S3 bucket (Staging)
 3. Run the ETL pipeline, proces the Data and ingest it to a Redshift Cluster (Data Warehouse) for analytical purposes.
@@ -27,9 +26,7 @@ code of an api
 
 ## Data Model
 
-```sh
-dbdiagram.io
-```
+![Data Model](https://github.com/Justmaister/Data-Enginering-Stock-Project/blob/master/images/Data%20Model.png)
 
 ## ETL Pipeline
 
