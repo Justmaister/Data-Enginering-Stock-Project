@@ -9,6 +9,8 @@
 
 The technical architecture for this project is as show below:
 
+![Architecture](https://github.com/Justmaister/Data-Enginering-Stock-Project/blob/master/images/Finance%20Project%20Architecture.png)
+
 **GRAPH**
 
 1. The Data extraction is done using the Rest API to the Financial Modeling Prep using the GET request.
