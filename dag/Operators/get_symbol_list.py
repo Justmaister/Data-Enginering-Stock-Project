@@ -46,10 +46,13 @@ class GetSymbolList(BaseOperator):
 
 
         symbol_list = sts.symbol_list()
+
+        symbol_list = symbol_list.head(5)
+
         self.log.info("Symbol List data retrieved from API")
 
         symbol_list.to_parquet('{}symbol_list.parquet.gzip'.format(bucket))
-
+        #symbol_list.to_csv('{}symbol_list.csv'.format(bucket))
 
 
         """
