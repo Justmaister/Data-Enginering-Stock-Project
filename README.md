@@ -2,8 +2,8 @@
 
 ## Project Description
 - This Project is a case study for a start-up, that track the evolution of the stock ratios as well las the financial statements of the stock companies.
-- The aim of this project is to create an ETL procces, on the stock data, to answer some different questions that an investing company could have in order to take decisions more accurated.
-- The data and metadata about the stoks comes from a Stock web page that conatins information realted with the stock market (news, stock prices, financial statements, and a lot more) called [Financial Modeling Prep] that has an Rest API with a lot of stock information.
+- The aim of this project is to create an **ETL procces with AWS cloud resources**, on the stock data, to answer some different questions that an investing company could have in order to take decisions more accurated.
+- The data and metadata about the stoks comes from a Stock web page that conatins information realted with the stock market (news, stock prices, financial statements, and a lot more) called [Financial Modeling Prep] that has an **Rest API** with a lot of stock information.
 
 ## Architecture
 
@@ -49,6 +49,19 @@ The process is as follows:
 
 ## Potential Improvements
 
+The assumption that I have made is that the data volume will not increase subtantially and the pipeline is only required to run once
+
+1. What if data is increased by 100x?
+
+We can create an EMR resource on AWS to run on spark cluster and scale it if necesary. Furthermore, airflow schedules can be utilized to pull only a subset of the data at a time, to reduce volume of data handled at any one time.
+
+2. What if data pipeline needs to be run by 7am daily?
+
+We can turn on the EC2 machine and run the pipeline before 7am daily. Currently, the schedule of the airflow pipeline is set to ingest only once. We can set it to a daily schedule, to ingest new data coming in daily.
+
+3. What if the database needs to be accessed by 100+ users?
+
+Redshift should not have an issue handling many users, but we should be careful to scale up/scale out with more nodes whenever necessary. To provide efficiency to queries, we can seek to understand common queries users have, so we can tweak our data model. Aggregated data tables can be provided beforehand to reduce query times. We can also assign sort keys according to users querying needs for each table.
 
 
 
@@ -56,3 +69,5 @@ The process is as follows:
 [alanchn31]: <https://github.com/alanchn31/Movalytics-Data-Warehouse#architecture>
 [FMP DEV]: <https://financialmodelingprep.com/developer/docs/>
 [CSV to PandasDataframe]: <https://gist.github.com/spitfiredd/9db5b512bd93489f1f07395b97b2f237>
+
+[Info Airflow distribution]: <We should add a new node to our Airflow DAG, to download data using API/get request and transfer to S3. In addition, to handle heavy workloads when backdating, CeleryExecutor should be used to run processes in a distributed fashion, ensuring there is no single point of failure. Furthermore, We can make use of Airflow's SLA feature, to send alerts should pipeline not have succeeded before a certain time (for eg, 6:00am)>
