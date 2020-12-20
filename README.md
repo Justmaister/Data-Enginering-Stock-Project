@@ -37,9 +37,15 @@ The ETL process runs through an Airflow DAG:
 
 The process is as follows:
 
-We create the tables and staging tables (if they do not exist)
-We perform an update and insert, based on new data coming in
-Run a data quality check (check that tables have more than 1 row and there are no null ids)
+- We call the API to get the data and save it to S3
+- Create the redshift cluster
+- Create the staging Tables on Redshift
+- Copy data to Staging Tables
+- Create the final Tables on Redshift
+- Upsert data into final Tables
+- Run quality check on the final tables
+
+![DAG Execution](https://github.com/Justmaister/Data-Enginering-Stock-Project/blob/master/images/DAG%20Execution.PNG)
 
 ## Potential Improvements
 
