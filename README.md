@@ -9,12 +9,11 @@
 
 The technical architecture for this project is as show below:
 
-
 ![Architecture](https://github.com/Justmaister/Data-Enginering-Stock-Project/blob/master/images/Finance%20Project%20Architecture.png)
 
 1. The Data extraction is done using the Rest API to the Financial Modeling Prep using the GET request.
 ```sh
-https://financialmodelingprep.com/api/v3/income-statement/AAPL?&apikey=demo'
+https://financialmodelingprep.com/api/v3/income-statement/AAPL?&apikey=demo
 ```
 2. Copy the data downloaded from the API call to an S3 bucket (Staging)
 3. Run the ETL pipeline, proces the Data and ingest it to a Redshift Cluster (Data Warehouse) for analytical purposes.
@@ -28,13 +27,13 @@ https://financialmodelingprep.com/api/v3/income-statement/AAPL?&apikey=demo'
 
 ![Data Model](https://github.com/Justmaister/Data-Enginering-Stock-Project/blob/master/images/Data%20Model.png)
 
+These diagram is only and approach with some columns in each table, it don't show all the columns that the table contains because there are some table containing more than 30 columns.
+
 ## ETL Pipeline
 
 The ETL process runs through an Airflow DAG:
 
-```sh
-Airflow Diagram UI
-```
+![ETL Pipeline](https://github.com/Justmaister/Data-Enginering-Stock-Project/blob/master/images/ETL%20Pipeline.PNG)
 
 The process is as follows:
 
@@ -43,3 +42,11 @@ We perform an update and insert, based on new data coming in
 Run a data quality check (check that tables have more than 1 row and there are no null ids)
 
 ## Potential Improvements
+
+
+
+
+[Financial Modeling Prep]: <https://financialmodelingprep.com/>
+[alanchn31]: <https://github.com/alanchn31/Movalytics-Data-Warehouse#architecture>
+[FMP DEV]: <https://financialmodelingprep.com/developer/docs/>
+[CSV to PandasDataframe]: <https://gist.github.com/spitfiredd/9db5b512bd93489f1f07395b97b2f237>
